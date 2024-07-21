@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HW1</string>
+    <string name="app_name">HWOne</string>
     <string name="settings">Settings</string>
     <string name="log_out">Log out</string>
     <string name="view_my_contacts">VIEW MY CONTACTS</string>
