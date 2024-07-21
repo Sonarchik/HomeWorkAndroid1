@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <View
@@ -49,8 +50,8 @@
         android:id="@+id/button_log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans"
         android:backgroundTint="@color/background"
+        android:fontFamily="@font/open_sans"
         android:padding="5dp"
         android:paddingStart="35dp"
         android:paddingEnd="35dp"
@@ -70,36 +71,76 @@
         android:id="@+id/view_my_contacts"
         android:layout_width="0dp"
         android:layout_height="55dp"
+        android:backgroundTint="@color/view_my_contacts"
         android:fontFamily="@font/open_sans"
         android:text="@string/view_my_contacts"
-        android:backgroundTint="@color/view_my_contacts"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/background_my_profile"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintVertical_bias="0.95"/>
+        app:layout_constraintVertical_bias="0.95" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_profile"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:backgroundTint="@color/white"
         android:fontFamily="@font/open_sans"
         android:text="@string/edit_profile"
-        android:backgroundTint="@color/white"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toTopOf="@id/view_my_contacts"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/background_my_profile"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintVertical_bias="0.95"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
+
+    <LinearLayout
+        android:id="@+id/links"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_my_profile">
+
+        <ImageButton
+            android:id="@+id/imageButtonFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_margin="@dimen/margin_medium"
+            app:srcCompat="@drawable/facebook"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/imageButtonLinkedIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_margin="@dimen/margin_medium"
+            app:srcCompat="@drawable/linkedin"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/imageButtonInstagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_margin="@dimen/margin_medium"
+            app:srcCompat="@drawable/instagram"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
