@@ -73,10 +73,6 @@
         android:fontFamily="@font/open_sans"
         android:text="@string/view_my_contacts"
         android:backgroundTint="@color/view_my_contacts"
-        tools:ignore="MissingConstraints"
-        android:padding="5dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -87,5 +83,23 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintVertical_bias="0.95"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_profile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/edit_profile"
+        android:backgroundTint="@color/white"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintBottom_toTopOf="@id/view_my_contacts"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintVertical_bias="0.95"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
