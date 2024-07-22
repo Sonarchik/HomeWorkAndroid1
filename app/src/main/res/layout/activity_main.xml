@@ -43,8 +43,7 @@
         app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toTopOf="@id/background_my_profile"
-        app:layout_constraintVertical_bias="0.08"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_log_out"
@@ -120,8 +119,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_margin="@dimen/margin_medium"
-            app:srcCompat="@drawable/facebook"
-            tools:ignore="MissingConstraints" />
+            app:srcCompat="@drawable/facebook"/>
 
         <ImageButton
             android:id="@+id/imageButtonLinkedIn"
@@ -129,8 +127,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_margin="@dimen/margin_medium"
-            app:srcCompat="@drawable/linkedin"
-            tools:ignore="MissingConstraints" />
+            app:srcCompat="@drawable/linkedin"/>
 
         <ImageButton
             android:id="@+id/imageButtonInstagram"
@@ -138,9 +135,61 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_margin="@dimen/margin_medium"
-            app:srcCompat="@drawable/instagram"
-            tools:ignore="MissingConstraints" />
+            app:srcCompat="@drawable/instagram"/>
 
     </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon_profile"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintVertical_bias="0.35"
+        android:src="@drawable/icon1"/>
+
+    <TextView
+        android:id="@+id/first_name_sure_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_name_sure_name"
+        android:textColor="@color/white"
+        android:fontFamily="@font/open_sans"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <TextView
+        android:id="@+id/career"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/career"
+        android:textColor="@color/log_out"
+        android:fontFamily="@font/open_sans"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/home_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_address"
+        android:textColor="@color/log_out"
+        android:fontFamily="@font/open_sans"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
