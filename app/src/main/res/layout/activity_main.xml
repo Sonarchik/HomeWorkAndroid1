@@ -99,17 +99,20 @@
         <ImageButton
             android:id="@+id/imageButtonFacebook"
             style="@style/ImageButtonStyle"
-            app:srcCompat="@drawable/facebook"/>
+            app:srcCompat="@drawable/facebook"
+            android:contentDescription="@string/facebook_description"/>
 
         <ImageButton
             android:id="@+id/imageButtonLinkedIn"
             style="@style/ImageButtonStyle"
-            app:srcCompat="@drawable/linkedin"/>
+            app:srcCompat="@drawable/linkedin"
+            android:contentDescription="@string/linkedin_description"/>
 
         <ImageButton
             android:id="@+id/imageButtonInstagram"
             style="@style/ImageButtonStyle"
-            app:srcCompat="@drawable/instagram"/>
+            app:srcCompat="@drawable/instagram"
+            android:contentDescription="@string/instagram_description" />
 
     </LinearLayout>
 
