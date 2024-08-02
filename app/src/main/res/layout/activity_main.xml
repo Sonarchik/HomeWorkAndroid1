@@ -5,15 +5,164 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/background_my_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/text_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.White24"
+        android:text="@string/settings"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/background_my_profile"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ButtonStyle.LogOut"
+        app:cornerRadius="6dp"
+        android:text="@string/log_out"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintTop_toTopOf="@id/background_my_profile"
+        app:layout_constraintVertical_bias="0.067"
+        app:strokeColor="@color/log_out"
+        app:strokeWidth="2dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/view_my_contacts"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        style="@style/ButtonStyle.Contacts"
+        android:text="@string/view_my_contacts"
+        app:cornerRadius="6dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/background_my_profile"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_profile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:minHeight="48dp"
+        style="@style/ButtonStyle.EditProfile"
+        android:text="@string/edit_profile"
+        app:cornerRadius="6dp"
+        app:layout_constraintBottom_toTopOf="@id/view_my_contacts"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/background_my_profile"
+        app:layout_constraintVertical_bias="0.95"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp" />
+
+    <LinearLayout
+        android:id="@+id/links"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_my_profile">
+
+        <ImageButton
+            android:id="@+id/imageButtonFacebook"
+            style="@style/ImageButtonStyle"
+            app:srcCompat="@drawable/facebook"
+            android:contentDescription="@string/facebook_description"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonLinkedIn"
+            style="@style/ImageButtonStyle"
+            app:srcCompat="@drawable/linkedin"
+            android:contentDescription="@string/linkedin_description"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonInstagram"
+            style="@style/ImageButtonStyle"
+            app:srcCompat="@drawable/instagram"
+            android:contentDescription="@string/instagram_description" />
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon_profile"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintVertical_bias="0.35"
+        android:src="@drawable/icon1"/>
+
+    <TextView
+        android:id="@+id/first_name_sure_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_name_sure_name"
+        style="@style/TextAppearance.AppCompat.White18"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <TextView
+        android:id="@+id/career"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/career"
+        style="@style/TextAppearance.AppCompat.LogOut14"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/home_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_address"
+        style="@style/TextAppearance.AppCompat.LogOut14"
+        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
