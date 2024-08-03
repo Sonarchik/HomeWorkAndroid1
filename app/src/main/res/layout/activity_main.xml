@@ -9,10 +9,10 @@
     tools:context=".MainActivity">
 
     <View
-        android:id="@+id/background_my_profile"
+        android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/background"
+        android:background="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,134 +32,160 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <TextView
-        android:id="@+id/text_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.White24"
-        android:text="@string/settings"
-        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_group"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="@id/top_view"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="@id/background_my_profile"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintVertical_bias="0.067"
+        app:constraint_referenced_ids="text_settings,button_log_out" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_settings"
+        style="@style/TextAppearance.AppCompat.White24"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        app:layout_constraintTop_toTopOf="@id/flow_group"
+        app:layout_constraintStart_toStartOf="@id/flow_group"
+        app:layout_constraintBottom_toBottomOf="@id/flow_group"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_log_out"
+        style="@style/ButtonStyle.LogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/ButtonStyle.LogOut"
-        app:cornerRadius="6dp"
         android:text="@string/log_out"
-        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintTop_toTopOf="@id/background_my_profile"
-        app:layout_constraintVertical_bias="0.067"
+        app:cornerRadius="6dp"
         app:strokeColor="@color/log_out"
-        app:strokeWidth="2dp" />
+        app:strokeWidth="2dp"
+        app:layout_constraintTop_toTopOf="@id/flow_group"
+        app:layout_constraintEnd_toEndOf="@id/flow_group"
+        app:layout_constraintBottom_toBottomOf="@id/flow_group"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/view_my_contacts"
+        style="@style/ButtonStyle.Contacts"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        style="@style/ButtonStyle.Contacts"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="@string/view_my_contacts"
-        app:cornerRadius="6dp"
         android:textStyle="bold"
+        app:cornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/background_my_profile"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        app:layout_constraintVertical_bias="0.95"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_profile"
+        style="@style/ButtonStyle.EditProfile"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:minHeight="48dp"
-        style="@style/ButtonStyle.EditProfile"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="@string/edit_profile"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toTopOf="@id/view_my_contacts"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/background_my_profile"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         app:layout_constraintVertical_bias="0.95"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
 
-    <LinearLayout
+    <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/links"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
+        app:constraint_referenced_ids="imageButtonFacebook,imageButtonLinkedIn,imageButtonInstagram"
+        app:flow_firstHorizontalBias="0.5"
+        app:flow_firstHorizontalStyle="spread_inside"
+        app:flow_horizontalGap="16dp"
         app:layout_constraintBottom_toTopOf="@id/edit_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/background_my_profile">
+        app:layout_constraintTop_toBottomOf="@id/top_view" />
 
-        <ImageButton
-            android:id="@+id/imageButtonFacebook"
-            style="@style/ImageButtonStyle"
-            app:srcCompat="@drawable/facebook"
-            android:contentDescription="@string/facebook_description"/>
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonFacebook"
+        style="@style/ImageButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/facebook_description"
+        app:layout_constraintBottom_toBottomOf="@id/links"
+        app:layout_constraintTop_toTopOf="@id/links"
+        app:srcCompat="@drawable/facebook" />
 
-        <ImageButton
-            android:id="@+id/imageButtonLinkedIn"
-            style="@style/ImageButtonStyle"
-            app:srcCompat="@drawable/linkedin"
-            android:contentDescription="@string/linkedin_description"/>
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonLinkedIn"
+        style="@style/ImageButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/linkedin_description"
+        app:layout_constraintBottom_toBottomOf="@id/links"
+        app:layout_constraintTop_toTopOf="@id/links"
+        app:srcCompat="@drawable/linkedin" />
 
-        <ImageButton
-            android:id="@+id/imageButtonInstagram"
-            style="@style/ImageButtonStyle"
-            app:srcCompat="@drawable/instagram"
-            android:contentDescription="@string/instagram_description" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonInstagram"
+        style="@style/ImageButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/instagram_description"
+        app:layout_constraintBottom_toBottomOf="@id/links"
+        app:layout_constraintTop_toTopOf="@id/links"
+        app:srcCompat="@drawable/instagram" />
 
-    </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_profile"
         android:layout_width="113dp"
-        android:layout_height="113dp"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:layout_height="0dp"
+        android:src="@drawable/icon1"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
-        app:layout_constraintVertical_bias="0.35"
-        android:src="@drawable/icon1"/>
+        app:layout_constraintVertical_bias="0.35" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/first_name_sure_name"
+        style="@style/TextAppearance.AppCompat.White18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/first_name_sure_name"
-        style="@style/TextAppearance.AppCompat.White18"
-        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/career"
+        style="@style/TextAppearance.AppCompat.LogOut14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/career"
-        style="@style/TextAppearance.AppCompat.LogOut14"
-        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.75" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/home_address"
+        style="@style/TextAppearance.AppCompat.LogOut14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_address"
-        style="@style/TextAppearance.AppCompat.LogOut14"
-        app:layout_constraintBottom_toBottomOf="@id/background_my_profile"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
