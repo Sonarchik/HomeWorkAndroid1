@@ -142,6 +142,22 @@
         app:layout_constraintTop_toTopOf="@id/flow_social_links"
         app:srcCompat="@drawable/instagram" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:constraint_referenced_ids="icon_profile, flow_name_career, text_home_address"
+        app:flow_verticalBias="0.4"
+        app:flow_verticalGap="@dimen/margin_small"
+        app:flow_verticalStyle="packed"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/top_view"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"/>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_profile"
         android:layout_width="0dp"
@@ -149,11 +165,9 @@
         android:src="@drawable/icon1"
         app:layout_constraintBottom_toBottomOf="@id/top_view"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintWidth_percent="0.33"/>
 
     <androidx.constraintlayout.helper.widget.Flow
@@ -161,17 +175,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
         android:insetTop="0dp"
         android:insetBottom="0dp"
         app:constraint_referenced_ids="text_first_name_sure_name, text_career"
-        app:flow_firstVerticalBias="0.5"
-        app:flow_verticalGap="8dp"
+        app:flow_verticalGap="@dimen/margin_smallest"
         app:flow_verticalStyle="spread_inside"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/icon_profile"
-        android:layout_marginTop="@dimen/margin_medium"/>
+        app:layout_constraintTop_toBottomOf="@id/icon_profile"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_first_name_sure_name"
@@ -201,7 +212,6 @@
         android:text="@string/home_address"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/flow_name_career"
-        android:layout_marginTop="@dimen/margin_small"/>
+        app:layout_constraintTop_toBottomOf="@id/flow_name_career"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
