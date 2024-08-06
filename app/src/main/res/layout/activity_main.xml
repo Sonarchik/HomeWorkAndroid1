@@ -106,10 +106,10 @@
         app:constraint_referenced_ids="button_facebook,button_linkedIn,button_instagram"
         app:flow_firstHorizontalBias="0.5"
         app:flow_firstHorizontalStyle="spread_inside"
-        app:flow_horizontalGap="32dp"
+        app:flow_horizontalGap="@dimen/margin_large"
         app:layout_constraintBottom_toTopOf="@id/button_edit_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/top_view" />
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -147,8 +147,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         app:constraint_referenced_ids="icon_profile, flow_name_career, text_home_address"
         app:flow_verticalBias="0.4"
         app:flow_verticalGap="@dimen/margin_small"
@@ -175,8 +173,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         app:constraint_referenced_ids="text_first_name_sure_name, text_career"
         app:flow_verticalGap="@dimen/margin_smallest"
         app:flow_verticalStyle="spread_inside"
