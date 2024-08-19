@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">HWOne</string>
+    <string name="appName">HWOne</string>
+    <string name="settingsLabel">Settings</string>
+    <string name="logOutBottom">Log out</string>
+    <string name="viewMyContactsBottom">VIEW MY CONTACTS</string>
+    <string name="editProfileBottom">Edit profile</string>
+    <string name="userFullName">Lucile Alvarado</string>
+    <string name="userCareer">Graphic designer</string>
+    <string name="userHomeAddress">5295 Gaylord Walks Apk. 110</string>
+
+    <string name="letsGetAcquaintedLabel">Let\'s get acquainted</string>
+    <string name="fillOutProfileInstruction">Fill out the profile and go to the application!</string>
+    <string name="registrationEmailLabel">E-mail</string>
+    <string name="registrationPasswordLabel">Password</string>
+    <string name="checkBoxRememberMe">Remember me</string>
+    <string name="googleBottom">GOOGLE</string>
+    <string name="registerBottom">REGISTER</string>
+    <string name="textViewOr">or</string>
+    <string name="textByClickingRegister">By clicking Register you agree to our Term
+        \nand Conditions</string>
+    <string name="alreadyHaveAccountLabel">Already have an account?</string>
+    <string name="singInBottom">Sing in</string>
+
+    <string name="errorIncorrectEmail">Incorrect email</string>
+    <string name="errorIncorrectPassword">Password must be at least 8 characters long, contain numbers and uppercase letters</string>
+
 </resources>

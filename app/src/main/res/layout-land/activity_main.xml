@@ -13,24 +13,38 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/dark_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.025" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.525" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.475" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.975" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowBottomGroup"
@@ -80,9 +94,9 @@
         android:text="@string/viewMyContactsBottom"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/topView"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_two"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_two"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
 
     <com.google.android.material.button.MaterialButton
@@ -95,10 +109,11 @@
         android:text="@string/editProfileBottom"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toTopOf="@id/buttonMyContacts"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/topView"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_two"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_two"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
+        app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
 
     <androidx.constraintlayout.helper.widget.Flow
@@ -106,13 +121,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="buttonFacebook,buttonLinkedIn,buttonInstagram"
-        app:flow_firstHorizontalBias="0.5"
         app:flow_firstHorizontalStyle="spread_inside"
         app:flow_horizontalGap="@dimen/margin_large"
-        app:layout_constraintBottom_toTopOf="@id/buttonEditProfile"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/topView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_two"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_two"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/buttonFacebook"
@@ -151,7 +166,7 @@
         android:orientation="vertical"
         app:constraint_referenced_ids="iconProfile, flowNameCareer, textHomeAddress"
         app:flow_verticalBias="0.4"
-        app:flow_verticalGap="@dimen/margin_small"
+        app:flow_verticalGap="@dimen/margin_smallest"
         app:flow_verticalStyle="packed"
         app:layout_constraintBottom_toBottomOf="@id/topView"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -167,15 +182,16 @@
         app:layout_constraintBottom_toBottomOf="@id/topView"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHeight_percent="0.33"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.33" />
+        app:layout_constraintTop_toTopOf="@id/topView" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowNameCareer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="@dimen/margin_small"
         app:constraint_referenced_ids="textFullName, textCareer"
         app:flow_verticalGap="@dimen/margin_smallest"
         app:flow_verticalStyle="spread_inside"
