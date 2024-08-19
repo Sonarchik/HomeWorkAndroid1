@@ -1,9 +1,41 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.HWOne" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        Customize your light theme here.
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowLightStatusBar">@color/white</item>
+        <!--                <item name="android:windowFullscreen">true</item>-->
     </style>
 
     <style name="Theme.HWOne" parent="Base.Theme.HWOne" />
+
+    <style name="TextInputLayoutFilledStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="boxCornerRadiusBottomEnd">5dp</item>
+        <item name="boxCornerRadiusBottomStart">5dp</item>
+        <item name="boxCornerRadiusTopEnd">5dp</item>
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxBackgroundColor">@color/dark_blue</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="boxStrokeColor">@color/color_selector</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="android:paddingTop">@dimen/margin_small</item>
+        <item name="hintTextAppearance">@style/TextAppearance.AppCompat.LogOut14</item>
+    </style>
+
+    <style name="TextInputEditTextFilledStyle" parent="Widget.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.White18</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingTop">35dp</item>
+    </style>
+
+    <style name="CheckBoxRememberMe" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.White14</item>
+        <item name="buttonTint">@color/white</item>
+    </style>
+
 </resources>
