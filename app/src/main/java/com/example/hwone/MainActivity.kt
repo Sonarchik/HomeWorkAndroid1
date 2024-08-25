@@ -12,32 +12,50 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userPreferences: UserPreferences
-    private lateinit var nameTextView: TextView
-    private lateinit var avatarIcon: CircleImageView
-    private lateinit var settingsTextView: AppCompatTextView
-    private lateinit var logOutButton: Button
+    private lateinit var userPreferences: UserPreferencesInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        userPreferences = UserPreferences(this)
-        initializeViews()
-        setupInsets()
-        loadUserData()
+        // Виберіть, яку реалізацію використовувати: SharedPreferences або DataStore
+//        userPreferences = UserPreferencesDataStore(this) // або UserPreferencesSharedPrefs(this)
+        userPreferences = UserPreferencesSharedPrefs(this) // або UserPreferencesDataStore(this)
+
+        val settingsTextView = findViewById<AppCompatTextView>(R.id.textSettings)
+        val logOutButton = findViewById<Button>(R.id.buttonLogOut)
+
+        lifecycleScope.launch {
+            val email = userPreferences.getEmail() ?: getString(R.string.userFullName)
+            val nameTextView = findViewById<TextView>(R.id.textFullName)
+            val avatarIcon = findViewById<CircleImageView>(R.id.iconProfile)
+
+            val name = parseEmailToName(email)
+
+            avatarIcon.setImageResource(R.drawable.icon1)
+            nameTextView.text = name
+        }
 
         settingsTextView.setOnClickListener {
-            openSettings()
+            val intent = Intent(Settings.ACTION_SETTINGS)
+            startActivity(intent)
         }
 
         logOutButton.setOnClickListener {
-            logoutUser()
+            lifecycleScope.launch {
+                userPreferences.logout()
+                val intent = Intent(this@MainActivity, AuthActivity::class.java)
+                startActivity(intent)
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
         }
 
         onBackPressedDispatcher.addCallback(this) {
@@ -45,53 +63,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeViews() {
-        nameTextView = findViewById(R.id.textFullName)
-        avatarIcon = findViewById(R.id.iconProfile)
-        settingsTextView = findViewById(R.id.textSettings)
-        logOutButton = findViewById(R.id.buttonLogOut)
-    }
-
-    private fun setupInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-
-    private fun loadUserData() {
-        val email = userPreferences.getEmail() ?: getString(R.string.userFullName)
-        val name = parseEmailToName(email)
-        updateUI(name)
-    }
-
     private fun parseEmailToName(email: String): String {
-        return email.substringBefore("@")
-            .split(".")
+        val namePart = email.substringBefore("@")
+        return namePart.split(".")
             .joinToString(" ") { it.replaceFirstChar { it.uppercase() } }
-    }
-
-    private fun updateUI(name: String) {
-        avatarIcon.setImageResource(R.drawable.icon1)
-        nameTextView.text = name
-    }
-
-    private fun openSettings() {
-        val intent = Intent(Settings.ACTION_SETTINGS)
-        startActivity(intent)
-    }
-
-    private fun logoutUser() {
-        userPreferences.logout()
-        navigateToAuthActivity()
-    }
-
-    private fun navigateToAuthActivity() {
-        val intent = Intent(this@MainActivity, AuthActivity::class.java)
-        val options = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_in_left, R.anim.slide_out_right)
-        startActivity(intent, options.toBundle())
-        finish()
     }
 
     private fun handleOnBackPressed() {

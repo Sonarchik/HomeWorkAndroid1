@@ -10,95 +10,89 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class AuthActivity : AppCompatActivity() {
 
-    private lateinit var emailInputLayout: TextInputLayout
-    private lateinit var emailInput: TextInputEditText
-    private lateinit var passInputLayout: TextInputLayout
-    private lateinit var passInput: TextInputEditText
-    private lateinit var registerButton: Button
-    private lateinit var userPreferences: UserPreferences
+    private lateinit var userPreferences: UserPreferencesInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Ініціалізація UserPreferences
-        userPreferences = UserPreferences(this)
+        // Виберіть, яку реалізацію використовувати: SharedPreferences або DataStore
+//        userPreferences = UserPreferencesDataStore(this) // або UserPreferencesSharedPrefs(this)
+        userPreferences = UserPreferencesSharedPrefs(this) // або UserPreferencesDataStore(this)
 
-        // Перевірка, чи користувач вже залогінений
-        if (userPreferences.isLoggedIn()) {
-            navigateToMainActivity(userPreferences.getEmail())
-            return
+        lifecycleScope.launch {
+            if (userPreferences.isLoggedIn()) {
+                navigateToMainActivity(userPreferences.getEmail())
+                return@launch
+            }
         }
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_auth)
 
-        initializeViews()
-        setupInsets()
-        setupValidation()
+        val emailInputLayout = findViewById<TextInputLayout>(R.id.EmailInputLayout)
+        val emailInput = findViewById<TextInputEditText>(R.id.EmailInput)
+        val passInputLayout = findViewById<TextInputLayout>(R.id.PassInputLayout)
+        val passInput = findViewById<TextInputEditText>(R.id.PassInput)
+        val registerButton = findViewById<Button>(R.id.buttonRegister)
+
+        registerButton.isEnabled = false
+
+        emailInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val email = s.toString()
+                if (!isValidEmail(email)) {
+                    emailInputLayout.error = getString(R.string.errorIncorrectEmail)
+                } else {
+                    emailInputLayout.error = null
+                }
+                checkFieldsForValidation(emailInput, passInput, registerButton)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        passInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val password = s.toString()
+                if (!isValidPassword(password)) {
+                    passInputLayout.error = getString(R.string.errorIncorrectPassword)
+                } else {
+                    passInputLayout.error = null
+                }
+                checkFieldsForValidation(emailInput, passInput, registerButton)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         registerButton.setOnClickListener {
-            handleRegistration()
-        }
-
-        onBackPressedDispatcher.addCallback(this) {
-            handleOnBackPressed()
-        }
-    }
-
-    private fun initializeViews() {
-        emailInputLayout = findViewById(R.id.EmailInputLayout)
-        emailInput = findViewById(R.id.EmailInput)
-        passInputLayout = findViewById(R.id.PassInputLayout)
-        passInput = findViewById(R.id.PassInput)
-        registerButton = findViewById(R.id.buttonRegister)
-        registerButton.isEnabled = false
-    }
-
-    private fun setupInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.auth)) { v, insets ->
-            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-
-    private fun setupValidation() {
-        emailInput.addTextChangedListener(createTextWatcher(emailInputLayout) { email ->
-            isValidEmail(email)
-        })
-
-        passInput.addTextChangedListener(createTextWatcher(passInputLayout) { password ->
-            isValidPassword(password)
-        })
-    }
-
-    private fun createTextWatcher(inputLayout: TextInputLayout, validator: (String) -> Boolean): TextWatcher {
-        return object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val text = s.toString()
-                if (!validator(text)) {
-                    inputLayout.error = getString(if (inputLayout == emailInputLayout) R.string.errorIncorrectEmail else R.string.errorIncorrectPassword)
-                } else {
-                    inputLayout.error = null
-                }
-                checkFieldsForValidation()
+            lifecycleScope.launch {
+                val email = emailInput.text.toString()
+                userPreferences.saveLoginData(email)
+                navigateToMainActivity(email)
             }
-
-            override fun afterTextChanged(s: Editable?) {}
         }
     }
 
-    private fun checkFieldsForValidation() {
+    private fun checkFieldsForValidation(emailInput: TextInputEditText, passInput: TextInputEditText, registerButton: Button) {
         val email = emailInput.text.toString()
         val password = passInput.text.toString()
         registerButton.isEnabled = isValidEmail(email) && isValidPassword(password)
+    }
+
+    private fun navigateToMainActivity(email: String?) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("email", email)
+        startActivity(intent)
+        finish()
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -108,25 +102,5 @@ class AuthActivity : AppCompatActivity() {
     private fun isValidPassword(password: String): Boolean {
         val passwordPattern = "^(?=.*[0-9])(?=.*[A-Z]).{8,}$"
         return password.matches(passwordPattern.toRegex())
-    }
-
-    private fun handleRegistration() {
-        val email = emailInput.text.toString()
-        userPreferences.saveLoginData(email)
-        navigateToMainActivity(email)
-    }
-
-    private fun navigateToMainActivity(email: String?) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("email", email)
-        val options = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_in_right, R.anim.slide_out_left)
-        startActivity(intent, options.toBundle())
-        finish()
-    }
-
-    private fun handleOnBackPressed() {
-        finish()
-        val options = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_in_left, R.anim.slide_out_right)
-        startActivity(intent, options.toBundle())
     }
 }
