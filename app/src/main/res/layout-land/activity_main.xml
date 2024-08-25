@@ -26,7 +26,7 @@
         app:layout_constraintGuide_percent="0.025" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_start_two"
+        android:id="@+id/guidelineStartTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -40,7 +40,7 @@
         app:layout_constraintGuide_percent="0.475" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end_two"
+        android:id="@+id/guidelineEndTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -94,8 +94,8 @@
         android:text="@string/viewMyContactsBottom"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end_two"
-        app:layout_constraintStart_toStartOf="@id/guideline_start_two"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndTwo"
+        app:layout_constraintStart_toStartOf="@id/guidelineStartTwo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
 
@@ -109,8 +109,8 @@
         android:text="@string/editProfileBottom"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toTopOf="@id/buttonMyContacts"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end_two"
-        app:layout_constraintStart_toStartOf="@id/guideline_start_two"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndTwo"
+        app:layout_constraintStart_toStartOf="@id/guidelineStartTwo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
         app:strokeColor="@color/black"
@@ -124,8 +124,8 @@
         app:flow_firstHorizontalStyle="spread_inside"
         app:flow_horizontalGap="@dimen/margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end_two"
-        app:layout_constraintStart_toStartOf="@id/guideline_start_two"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndTwo"
+        app:layout_constraintStart_toStartOf="@id/guidelineStartTwo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35" />
 

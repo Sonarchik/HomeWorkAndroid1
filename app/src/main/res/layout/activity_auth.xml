@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".AuthActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowCentralText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="textLabelLetGet, textLabelFillOut"
+        app:flow_verticalGap="@dimen/margin_smallest"
+        app:flow_verticalStyle="spread_inside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textLabelLetGet"
+        style="@style/TextAppearance.AppCompat.White24"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/letsGetAcquaintedLabel"
+        app:layout_constraintBottom_toTopOf="@id/textLabelFillOut"
+        app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+        app:layout_constraintStart_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textLabelFillOut"
+        style="@style/TextAppearance.AppCompat.White12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fillOutProfileInstruction"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/textLabelLetGet" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowEmailPassRemember"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="EmailInputLayout,PassInputLayout, checkBox"
+        app:flow_verticalStyle="spread_inside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/EmailInputLayout"
+        style="@style/TextInputLayoutFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/registrationEmailLabel"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EmailInput"
+            style="@style/TextInputEditTextFilledStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/PassInputLayout"
+        style="@style/TextInputLayoutFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/registrationPasswordLabel"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/PassInput"
+            style="@style/TextInputEditTextFilledStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            android:inputType="textPassword"
+            android:letterSpacing="0"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkBox"
+        style="@style/CheckBoxRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="0dp"
+        android:text="@string/checkBoxRememberMe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowGoogleRegisterLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="buttonGoogle,textLabelOr, buttonRegister,
+        textLabelByClickingRegister, flowBottomGroup"
+        app:flow_verticalGap="@dimen/margin_smallest"
+        app:flow_verticalStyle="spread_inside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGoogle"
+        style="@style/ButtonStyle.Google"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/googleBottom"
+        app:cornerRadius="6dp"
+        app:icon="@drawable/ic_google"
+        app:iconGravity="textStart"
+        app:iconPadding="12dp"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textLabelOr"
+        style="@style/TextAppearance.AppCompat.White18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewOr" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegister"
+        style="@style/ButtonStyle.Register"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/registerBottom"
+        app:cornerRadius="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="2dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textLabelByClickingRegister"
+        style="@style/TextAppearance.AppCompat.White12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="@string/textByClickingRegister"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowBottomGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textLabelAlreadyHave,buttonSingIn"
+        app:flow_horizontalStyle="packed"
+        app:flow_horizontalGap="@dimen/margin_smallest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textLabelAlreadyHave"
+        style="@style/TextAppearance.AppCompat.LogOut14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alreadyHaveAccountLabel" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/buttonSingIn"
+        style="@style/ButtonStyle.SingIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/singInBottom"
+        android:paddingStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/text_color_selector"
+        app:layout_constraintBottom_toBottomOf="@id/flowBottomGroup"
+        app:layout_constraintEnd_toEndOf="@id/flowBottomGroup"
+        app:layout_constraintTop_toTopOf="@id/flowBottomGroup"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

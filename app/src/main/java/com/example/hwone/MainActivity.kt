@@ -5,69 +5,73 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var userPreferences: UserPreferencesInterface
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Виберіть, яку реалізацію використовувати: SharedPreferences або DataStore
+//        userPreferences = UserPreferencesDataStore(this) // або UserPreferencesSharedPrefs(this)
+        userPreferences = UserPreferencesSharedPrefs(this) // або UserPreferencesDataStore(this)
+
         val settingsTextView = findViewById<AppCompatTextView>(R.id.textSettings)
         val logOutButton = findViewById<Button>(R.id.buttonLogOut)
-// Приймаємо електронну пошту з AuthActivity
-        val email = intent.getStringExtra("email")
-        val nameTextView = findViewById<TextView>(R.id.textFullName)
-        val avatarIcon = findViewById<CircleImageView>(R.id.iconProfile)
 
-        // Обробляємо електронну пошту, щоб перетворити її на ім'я
-        val name = parseEmailToName(email ?: getString(R.string.userFullName))
+        lifecycleScope.launch {
+            val email = userPreferences.getEmail() ?: getString(R.string.userFullName)
+            val nameTextView = findViewById<TextView>(R.id.textFullName)
+            val avatarIcon = findViewById<CircleImageView>(R.id.iconProfile)
 
-        // Відображаємо ім'я на екрані
-//        avatar.setImageResource(R.drawable.icon1)
-        nameTextView.text = name
+            val name = parseEmailToName(email)
 
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+            avatarIcon.setImageResource(R.drawable.icon1)
+            nameTextView.text = name
         }
 
         settingsTextView.setOnClickListener {
-            // Інтент для переходу в загальні налаштування
             val intent = Intent(Settings.ACTION_SETTINGS)
             startActivity(intent)
         }
 
         logOutButton.setOnClickListener {
+            lifecycleScope.launch {
+                userPreferences.logout()
+                val intent = Intent(this@MainActivity, AuthActivity::class.java)
+                startActivity(intent)
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
+        }
 
-            // Переходимо на екран AuthActivity
-            val intent = Intent(this, AuthActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        onBackPressedDispatcher.addCallback(this) {
+            handleOnBackPressed()
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        // Анімація для повернення назад
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    private fun parseEmailToName(email: String): String {
+        val namePart = email.substringBefore("@")
+        return namePart.split(".")
+            .joinToString(" ") { it.replaceFirstChar { it.uppercase() } }
     }
 
-    // Функція для обробки електронної пошти та перетворення її на ім'я
-    private fun parseEmailToName(email: String): String {
-            val namePart = email.substringBefore("@") // Беремо частину до @
-            val nameParts = namePart.split(".")
-                .joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() } }
-            return nameParts
-
-
+    private fun handleOnBackPressed() {
+        finish()
+        val options = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_in_left, R.anim.slide_out_right)
+        startActivity(intent, options.toBundle())
     }
 }
