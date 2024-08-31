@@ -2,102 +2,120 @@ package com.example.hwone
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.example.hwone.Constants.EXTRA_EMAIL
+import com.example.hwone.databinding.ActivityAuthBinding
+import com.example.hwone.utils.ValidationUtils.isValidEmail
+import com.example.hwone.utils.ValidationUtils.isValidPassword
 import kotlinx.coroutines.launch
 
 class AuthActivity : AppCompatActivity() {
 
-    private lateinit var userPreferences: UserPreferencesInterface
+    private val binding: ActivityAuthBinding by lazy {
+        ActivityAuthBinding.inflate(layoutInflater)
+    }
+    private val userPreferences: UserPreferencesInterface by lazy {
+        // Choose the desired implementation: SharedPreferences or DataStore
+        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
+//        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        isValidSession()
         super.onCreate(savedInstanceState)
+        setupUI()
+        setupListeners()
+        applyWindowInsets()
+    }
 
-        // Виберіть, яку реалізацію використовувати: SharedPreferences або DataStore
-//        userPreferences = UserPreferencesDataStore(this) // або UserPreferencesSharedPrefs(this)
-        userPreferences = UserPreferencesSharedPrefs(this) // або UserPreferencesDataStore(this)
-
+    //Checking if the user is still logged in
+    private fun isValidSession() {
         lifecycleScope.launch {
             if (userPreferences.isLoggedIn()) {
                 navigateToMainActivity(userPreferences.getEmail())
                 return@launch
             }
         }
+    }
 
+    // Customizing the user interface
+    private fun setupUI() {
         enableEdgeToEdge()
-        setContentView(R.layout.activity_auth)
+        setContentView(binding.auth)
+        binding.buttonRegister.isEnabled = false
+    }
 
-        val emailInputLayout = findViewById<TextInputLayout>(R.id.EmailInputLayout)
-        val emailInput = findViewById<TextInputEditText>(R.id.EmailInput)
-        val passInputLayout = findViewById<TextInputLayout>(R.id.PassInputLayout)
-        val passInput = findViewById<TextInputEditText>(R.id.PassInput)
-        val registerButton = findViewById<Button>(R.id.buttonRegister)
+    // Configuring event listeners
+    private fun setupListeners() {
+        setupEmailInputListener()
+        setupPasswordInputListener()
+        setupRegisterButtonListener()
+    }
 
-        registerButton.isEnabled = false
+    // Event listener for the Email input field
+    private fun setupEmailInputListener() {
+        binding.emailInput.doOnTextChanged { text, _, _, _ ->
+            val email = text.toString()
+            binding.emailInputLayout.error =
+                if (!isValidEmail(email)) getString(R.string.errorIncorrectEmail) else null
+            checkFieldsForValidation()
+        }
+    }
 
-        emailInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val email = s.toString()
-                if (!isValidEmail(email)) {
-                    emailInputLayout.error = getString(R.string.errorIncorrectEmail)
-                } else {
-                    emailInputLayout.error = null
-                }
-                checkFieldsForValidation(emailInput, passInput, registerButton)
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
+    // Event listener for the password input field
+    private fun setupPasswordInputListener() {
+        binding.passInput.doOnTextChanged { text, _, _, _ ->
+            val password = text.toString()
+            binding.passInputLayout.error =
+                if (!isValidPassword(password)) getString(R.string.errorIncorrectPassword) else null
+            checkFieldsForValidation()
+        }
+    }
 
-        passInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val password = s.toString()
-                if (!isValidPassword(password)) {
-                    passInputLayout.error = getString(R.string.errorIncorrectPassword)
-                } else {
-                    passInputLayout.error = null
-                }
-                checkFieldsForValidation(emailInput, passInput, registerButton)
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-        registerButton.setOnClickListener {
+    // Event listener for the registration button
+    private fun setupRegisterButtonListener() {
+        binding.buttonRegister.setOnClickListener {
             lifecycleScope.launch {
-                val email = emailInput.text.toString()
+                val email = binding.emailInput.text.toString()
                 userPreferences.saveLoginData(email)
                 navigateToMainActivity(email)
             }
         }
     }
 
-    private fun checkFieldsForValidation(emailInput: TextInputEditText, passInput: TextInputEditText, registerButton: Button) {
-        val email = emailInput.text.toString()
-        val password = passInput.text.toString()
-        registerButton.isEnabled = isValidEmail(email) && isValidPassword(password)
+    // Application of indents for window inserts
+    private fun applyWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.auth)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
+    // Checking the fields to activate the registration button
+    private fun checkFieldsForValidation() {
+        val email = binding.emailInput.text.toString()
+        val password = binding.passInput.text.toString()
+        binding.buttonRegister.isEnabled = isValidEmail(email) && isValidPassword(password)
+    }
+
+    // Go to MainActivity
     private fun navigateToMainActivity(email: String?) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("email", email)
-        startActivity(intent)
+        intent.putExtra(EXTRA_EMAIL, email)
+
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this,
+            R.anim.slide_in_right,
+            R.anim.slide_out_left
+        )
+        startActivity(intent, options.toBundle())
         finish()
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        val passwordPattern = "^(?=.*[0-9])(?=.*[A-Z]).{8,}$"
-        return password.matches(passwordPattern.toRegex())
     }
 }

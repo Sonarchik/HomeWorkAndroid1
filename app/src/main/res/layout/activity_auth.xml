@@ -63,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:constraint_referenced_ids="EmailInputLayout,PassInputLayout, checkBox"
+        app:constraint_referenced_ids="emailInputLayout,passInputLayout, checkBox"
         app:flow_verticalStyle="spread_inside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -73,7 +73,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
 
-        android:id="@+id/EmailInputLayout"
+        android:id="@+id/emailInputLayout"
         style="@style/TextInputLayoutFilledStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EmailInput"
+            android:id="@+id/emailInput"
             style="@style/TextInputEditTextFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
 
-        android:id="@+id/PassInputLayout"
+        android:id="@+id/passInputLayout"
         style="@style/TextInputLayoutFilledStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/PassInput"
+            android:id="@+id/passInput"
             style="@style/TextInputEditTextFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

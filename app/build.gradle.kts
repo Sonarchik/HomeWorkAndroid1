@@ -37,6 +37,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    viewBinding{
+        enable = true
+    }
 }
 
 dependencies {
@@ -51,12 +54,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.circleimageview)
-    // https://mvnrepository.com/artifact/androidx.datastore/datastore-preferences
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-
-    // https://mvnrepository.com/artifact/androidx.datastore/datastore-core
-    implementation("androidx.datastore:datastore-core:1.1.1")
-
-
+    implementation(libs.androidx.datastore)
 
 }

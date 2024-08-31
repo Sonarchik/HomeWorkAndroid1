@@ -23,5 +23,6 @@
 
     <string name="errorIncorrectEmail">Incorrect email</string>
     <string name="errorIncorrectPassword">Password must be at least 8 characters long, contain numbers and uppercase letters</string>
+    <string name="notificationBackButton">Press again to exit the program</string>
 
 </resources>

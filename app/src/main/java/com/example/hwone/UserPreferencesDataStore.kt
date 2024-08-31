@@ -5,19 +5,19 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.hwone.Constants.EXTRA_EMAIL
+import com.example.hwone.Constants.IS_LOGGED_IN
+import com.example.hwone.Constants.USER_PREFS
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
-// Extension property для DataStore
-private val Context.dataStore by preferencesDataStore("user_prefs")
+// Extension property for DataStore
+private val Context.dataStore by preferencesDataStore(USER_PREFS)
+
 class UserPreferencesDataStore(private val context: Context) : UserPreferencesInterface {
 
     private val dataStore = context.dataStore
 
-    companion object {
-        private val EMAIL_KEY = stringPreferencesKey("email")
-        private val IS_LOGGED_IN_KEY = booleanPreferencesKey("is_logged_in")
-    }
 
     override suspend fun saveLoginData(email: String) {
         dataStore.edit { preferences ->
@@ -42,5 +42,10 @@ class UserPreferencesDataStore(private val context: Context) : UserPreferencesIn
         dataStore.edit { preferences ->
             preferences.clear()
         }
+    }
+
+    companion object {
+        private val EMAIL_KEY = stringPreferencesKey(EXTRA_EMAIL)
+        private val IS_LOGGED_IN_KEY = booleanPreferencesKey(IS_LOGGED_IN)
     }
 }
