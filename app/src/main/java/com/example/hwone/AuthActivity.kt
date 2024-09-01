@@ -11,6 +11,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.example.hwone.Constants.EXTRA_EMAIL
 import com.example.hwone.databinding.ActivityAuthBinding
+import com.example.hwone.userdto.UserPreferencesDataStore
+import com.example.hwone.userdto.UserPreferencesInterface
+import com.example.hwone.userdto.UserPreferencesSharedPrefs
 import com.example.hwone.utils.ValidationUtils.isValidEmail
 import com.example.hwone.utils.ValidationUtils.isValidPassword
 import kotlinx.coroutines.launch
@@ -27,19 +30,18 @@ class AuthActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        isValidSession()
+        checkRememberMe()
         super.onCreate(savedInstanceState)
         setupUI()
         setupListeners()
         applyWindowInsets()
     }
 
-    //Checking if the user is still logged in
-    private fun isValidSession() {
+    //Checking whether the Remember me check box is present
+    private fun checkRememberMe() {
         lifecycleScope.launch {
-            if (userPreferences.isLoggedIn()) {
+            if (userPreferences.isRememberMeChecked()) {
                 navigateToMainActivity(userPreferences.getEmail())
-                return@launch
             }
         }
     }
@@ -49,6 +51,13 @@ class AuthActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.auth)
         binding.buttonRegister.isEnabled = false
+
+        lifecycleScope.launch {
+            if (userPreferences.isRememberMeChecked()) {
+                binding.emailInput.setText(userPreferences.getEmail())
+                binding.passInput.setText(userPreferences.getPassword())
+            }
+        }
     }
 
     // Configuring event listeners
@@ -83,7 +92,9 @@ class AuthActivity : AppCompatActivity() {
         binding.buttonRegister.setOnClickListener {
             lifecycleScope.launch {
                 val email = binding.emailInput.text.toString()
-                userPreferences.saveLoginData(email)
+                val password = binding.passInput.text.toString()
+                val rememberMe = binding.checkBox.isChecked
+                userPreferences.saveLoginData(email,password,rememberMe)
                 navigateToMainActivity(email)
             }
         }

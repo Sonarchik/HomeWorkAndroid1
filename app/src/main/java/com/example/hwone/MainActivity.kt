@@ -2,6 +2,8 @@ package com.example.hwone
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -13,6 +15,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.hwone.Constants.EXTRA_EMAIL
 import com.example.hwone.databinding.ActivityMainBinding
+import com.example.hwone.userdto.UserPreferencesDataStore
+import com.example.hwone.userdto.UserPreferencesInterface
+import com.example.hwone.userdto.UserPreferencesSharedPrefs
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 //        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
     }
     private var backPressedOnce = false
-    private var rememberMeChecked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +75,11 @@ class MainActivity : AppCompatActivity() {
     //The logic for processing the "Back" button is implemented here.
     // Includes checking if a button has been pressed twice to exit the program or exit the activity.
     private fun handleBackPress() {
+        val handler = Handler(Looper.getMainLooper())
+        val resetBackPressed = Runnable { backPressedOnce = false }
+
         onBackPressedDispatcher.addCallback(this) {
             if (backPressedOnce) {
-
                 finish()
             } else {
                 this@MainActivity.backPressedOnce = true
@@ -82,10 +88,8 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                lifecycleScope.launch {
-                    kotlinx.coroutines.delay(2000)
-                    backPressedOnce = false
-                }
+                // Start a timer to reset backPressedOnce after 2 seconds
+                handler.postDelayed(resetBackPressed, 2000)
             }
         }
     }
