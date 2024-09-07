@@ -21,8 +21,8 @@
     <string name="alreadyHaveAccountLabel">Already have an account?</string>
     <string name="singInBottom">Sing in</string>
 
-    <string name="errorIncorrectEmail">Incorrect email</string>
-    <string name="errorIncorrectPassword">Password must be at least 8 characters long, contain numbers and uppercase letters</string>
+    <string name="errorIncorrectEmail">Incorrect E-Mail address</string>
+    <string name="errorIncorrectPassword">Your password must include a minimum of 8 characters.</string>
     <string name="notificationBackButton">Press again to exit the program</string>
 
 </resources>

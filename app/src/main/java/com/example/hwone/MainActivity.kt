@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val userPreferences: UserPreferencesInterface by lazy {
-        // Choose the desired implementation: SharedPreferences or DataStore
-        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
-//        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
+//         Choose the desired implementation: SharedPreferences or DataStore
+//        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
+        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
     }
     private var backPressedOnce = false
 

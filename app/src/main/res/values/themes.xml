@@ -22,7 +22,8 @@
         <item name="hintTextColor">@color/gray</item>
         <item name="boxStrokeColor">@color/color_selector</item>
         <item name="boxStrokeWidth">1dp</item>
-        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="expandedHintEnabled">false</item>
         <item name="android:paddingTop">@dimen/margin_small</item>
         <item name="hintTextAppearance">@style/TextAppearance.AppCompat.LogOut14</item>
     </style>
@@ -34,10 +35,12 @@
         <item name="android:paddingTop">35dp</item>
     </style>
 
-    <style name="CheckBoxRememberMe" parent="Widget.Material3.CompoundButton.CheckBox">
+    <style name="CheckBoxRememberMe">
         <item name="android:textColor">@color/gray</item>
+        <item name="android:button">@drawable/custom_checkbox_selector</item>
+        <item name="android:padding">8dp</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.White14</item>
-        <item name="buttonTint">@color/white</item>
+        <item name="buttonTint">@null</item>
     </style>
 
 </resources>

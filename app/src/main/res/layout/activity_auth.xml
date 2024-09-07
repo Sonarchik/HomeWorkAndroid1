@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/dark_blue"
             android:inputType="textPassword"
-            android:letterSpacing="0"
+            android:letterSpacing="0.3"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineStart" />
 
@@ -127,7 +127,6 @@
         style="@style/CheckBoxRememberMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="0dp"
         android:text="@string/checkBoxRememberMe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -191,7 +190,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textLabelByClickingRegister"
         style="@style/TextAppearance.AppCompat.White12"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="8dp"
@@ -206,7 +205,6 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="textLabelAlreadyHave,buttonSingIn"
         app:flow_horizontalStyle="packed"
-        app:flow_horizontalGap="@dimen/margin_smallest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"/>
