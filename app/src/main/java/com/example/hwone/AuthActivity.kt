@@ -26,8 +26,8 @@ class AuthActivity : AppCompatActivity() {
     }
     private val userPreferences: UserPreferencesInterface by lazy {
         // Choose the desired implementation: SharedPreferences or DataStore
-//        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
-        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
+        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
+//        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

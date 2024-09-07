@@ -34,35 +34,41 @@ class UserPreferencesDataStore(private val context: Context) : UserPreferencesIn
     }
 
     override suspend fun saveLoginData(email: String, password: String, rememberMe: Boolean) {
-        saveValue(EMAIL_KEY, email)
-        saveValue(PASSWORD_KEY, if (rememberMe) password else "")
-        saveValue(REMEMBER_ME_KEY, rememberMe)
+        saveValue(stringPreferencesKey( EMAIL_KEY), email)
+        saveValue(stringPreferencesKey( PASSWORD_KEY), if (rememberMe) password else "")
+        saveValue(booleanPreferencesKey( REMEMBER_ME_KEY), rememberMe)
     }
 
     // Return Flow<Boolean> for "Remember Me" state
     override suspend fun isRememberMeChecked(): Flow<Boolean> {
-        return getValue(REMEMBER_ME_KEY, false).map { it ?: false }
+        return getValue(booleanPreferencesKey( REMEMBER_ME_KEY), false).map { it ?: false }
     }
 
     // Return Flow<String?> for email
     override suspend fun getEmail(): Flow<String?> {
-        return getValue(EMAIL_KEY)
+        return getValue(stringPreferencesKey( EMAIL_KEY))
     }
 
     // Return Flow<String?> for password
     override suspend fun getPassword(): Flow<String?> {
-        return getValue(PASSWORD_KEY)
+        return getValue(stringPreferencesKey( PASSWORD_KEY))
     }
 
     override suspend fun logout() {
         dataStore.edit { preferences ->
-            preferences.clear()
+            val emailKey  = stringPreferencesKey(EMAIL_KEY)
+            val passwordKey = stringPreferencesKey(PASSWORD_KEY)
+            val rememberMeKey = stringPreferencesKey(REMEMBER_ME_KEY)
+
+            preferences.remove(emailKey )
+            preferences.remove(passwordKey)
+            preferences.remove(rememberMeKey)
         }
     }
 
     companion object {
-        private val EMAIL_KEY = stringPreferencesKey(EXTRA_EMAIL)
-        private val PASSWORD_KEY = stringPreferencesKey(EXTRA_PASSWORD)
-        private val REMEMBER_ME_KEY = booleanPreferencesKey(EXTRA_REMEMBER)
+        private const val EMAIL_KEY = EXTRA_EMAIL
+        private const val PASSWORD_KEY = EXTRA_PASSWORD
+        private const val REMEMBER_ME_KEY = EXTRA_REMEMBER
     }
 }

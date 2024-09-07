@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
     }
     private val userPreferences: UserPreferencesInterface by lazy {
 //         Choose the desired implementation: SharedPreferences or DataStore
-//        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
-        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
+        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
+//        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
     }
     private var backPressedOnce = false
 
@@ -80,7 +80,8 @@ class MainActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this) {
             if (backPressedOnce) {
-                finish()
+                //If you set the finish line, then the first time instead of turning, the program returns to the same activity
+                moveTaskToBack(true)
             } else {
                 this@MainActivity.backPressedOnce = true
                 Toast.makeText(
