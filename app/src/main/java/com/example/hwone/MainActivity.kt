@@ -64,14 +64,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Application of indents for window inserts
+
     private fun applyWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
     }
-
     //The logic for processing the "Back" button is implemented here.
     // Includes checking if a button has been pressed twice to exit the program or exit the activity.
     private fun handleBackPress() {
@@ -80,8 +80,7 @@ class MainActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this) {
             if (backPressedOnce) {
-                //If you set the finish line, then the first time instead of turning, the program returns to the same activity
-                moveTaskToBack(true)
+                finish()
             } else {
                 this@MainActivity.backPressedOnce = true
                 Toast.makeText(

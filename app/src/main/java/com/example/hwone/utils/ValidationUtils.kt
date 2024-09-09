@@ -7,7 +7,7 @@ object ValidationUtils {
     }
 
     fun isValidPassword(password: String): Boolean {
-        val passwordPattern = "^(?=.*[0-9])(?=.*[A-Z]).{8,}$"
-        return password.matches(passwordPattern.toRegex())
+        val passwordPattern = ".{8,}"
+        return password.matches(Regex(passwordPattern))
     }
 }

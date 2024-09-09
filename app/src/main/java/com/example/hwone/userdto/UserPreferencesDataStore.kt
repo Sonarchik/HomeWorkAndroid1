@@ -35,7 +35,7 @@ class UserPreferencesDataStore(private val context: Context) : UserPreferencesIn
 
     override suspend fun saveLoginData(email: String, password: String, rememberMe: Boolean) {
         saveValue(stringPreferencesKey( EMAIL_KEY), email)
-        saveValue(stringPreferencesKey( PASSWORD_KEY), if (rememberMe) password else "")
+        saveValue(stringPreferencesKey( PASSWORD_KEY), password)
         saveValue(booleanPreferencesKey( REMEMBER_ME_KEY), rememberMe)
     }
 

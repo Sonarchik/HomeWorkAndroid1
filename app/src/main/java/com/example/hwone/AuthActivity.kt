@@ -17,6 +17,7 @@ import com.example.hwone.userdto.UserPreferencesInterface
 import com.example.hwone.userdto.UserPreferencesSharedPrefs
 import com.example.hwone.utils.ValidationUtils.isValidEmail
 import com.example.hwone.utils.ValidationUtils.isValidPassword
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class AuthActivity : AppCompatActivity() {
@@ -41,12 +42,10 @@ class AuthActivity : AppCompatActivity() {
     //Checking whether the Remember me check box is present
     private fun checkRememberMe() {
         lifecycleScope.launch {
-            userPreferences.isRememberMeChecked().collect { rememberMeChecked ->
-                if (rememberMeChecked == true) {
-                    userPreferences.getEmail().collect { email ->
-                        navigateToMainActivity(email)
-                    }
-                }
+            val rememberMeChecked = userPreferences.isRememberMeChecked().first()
+            if (rememberMeChecked == true) {
+                val email = userPreferences.getEmail().first()
+                navigateToMainActivity(email)
             }
         }
     }
@@ -55,19 +54,6 @@ class AuthActivity : AppCompatActivity() {
     private fun setupUI() {
         enableEdgeToEdge()
         setContentView(binding.auth)
-
-        lifecycleScope.launch {
-            userPreferences.isRememberMeChecked().collect { rememberMeChecked ->
-                if (rememberMeChecked == true) {
-                    userPreferences.getEmail().collect { email ->
-                        binding.emailInput.setText(email)
-                    }
-                    userPreferences.getPassword().collect { password ->
-                        binding.passInput.setText(password)
-                    }
-                }
-            }
-        }
     }
 
     // Configuring event listeners
@@ -129,7 +115,7 @@ class AuthActivity : AppCompatActivity() {
 
     // Application of indents for window inserts
     private fun applyWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.auth)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.auth) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
