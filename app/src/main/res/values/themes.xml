@@ -7,7 +7,7 @@
 <!--        <item name="android:windowLightStatusBar">@color/white</item>-->
 <!--        <item name="android:fitsSystemWindows">false</item>-->
                         <item name="android:windowFullscreen">true</item>
-    </style>f
+    </style>
 
     <style name="Theme.HWOne" parent="Base.Theme.HWOne" />
 
@@ -29,7 +29,6 @@
     </style>
 
     <style name="TextInputEditTextFilledStyle" parent="Widget.MaterialComponents.TextInputEditText.FilledBox">
-        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.White18</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:paddingTop">35dp</item>
