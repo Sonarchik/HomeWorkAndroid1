@@ -1,0 +1,26 @@
+<resources>
+    <string name="appName">HWOne</string>
+    <string name="settingsLabel">Налаштування</string>
+    <string name="logOutBottom">Вийти</string>
+    <string name="viewMyContactsBottom">Переглянути мої контакти</string>
+    <string name="editProfileBottom">Редагувати профіль</string>
+    <string name="userFullName">Люсіль Альваро</string>
+    <string name="userCareer">Графічний дизайнер</string>
+    <string name="userHomeAddress">5295 Gaylord Walks Apk. 110</string>
+
+    <string name="letsGetAcquaintedLabel">Вже маєте акаунт?</string>
+    <string name="fillOutProfileInstruction">Заповніть профіль і перейдіть до заявки!</string>
+    <string name="registrationEmailLabel">Електронна пошта</string>
+    <string name="registrationPasswordLabel">Пароль</string>
+    <string name="checkBoxRememberMe">Запамʼятати мене</string>
+    <string name="googleBottom">GOOGLE</string>
+    <string name="registerBottom">Зареєструватися</string>
+    <string name="textViewOr">або</string>
+    <string name="textByClickingRegister">Натиснувши «Зареєструватися», ви погоджуєтеся з нашими положеннями та умовами</string>
+    <string name="alreadyHaveAccountLabel">Вже маєте обліковий запис?</string>
+    <string name="singInBottom">Увійти</string>
+
+    <string name="errorIncorrectEmail">Неправильна адреса електронної пошти</string>
+    <string name="errorIncorrectPassword">Ваш пароль повинен містити щонайменше 8 символів.</string>
+    <string name="notificationBackButton">Натисніть ще раз, щоб вийти з програми</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="black">#FF000000</color>
+    <color name="text_color_primary">#EEA205</color>
+    <color name="settings_color">#CCC58F</color>
+    <color name="back_ground_color">#000000</color>
+    <color name="text_color_secondary">#F0CA00</color>
+    <color name="icon_color">#1E4D2B</color>
+    <color name="transparent_color">#00000000</color>
+    <color name="gray_primary">#121212</color>
+
+</resources>
