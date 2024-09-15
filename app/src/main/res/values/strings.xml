@@ -16,8 +16,7 @@
     <string name="googleBottom">GOOGLE</string>
     <string name="registerBottom">REGISTER</string>
     <string name="textViewOr">or</string>
-    <string name="textByClickingRegister">By clicking Register you agree to our Term
-        \nand Conditions</string>
+    <string name="textByClickingRegister">By clicking Register you agree to our Term and Conditions</string>
     <string name="alreadyHaveAccountLabel">Already have an account?</string>
     <string name="singInBottom">Sing in</string>
 

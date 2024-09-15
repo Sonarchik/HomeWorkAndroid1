@@ -192,7 +192,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textLabelByClickingRegister"
         style="@style/TextAppearance.AppCompat.White12"
-        android:layout_width="280dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="8dp"
