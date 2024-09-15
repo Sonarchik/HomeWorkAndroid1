@@ -2,72 +2,128 @@ package com.example.hwone
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
-import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import de.hdodenhof.circleimageview.CircleImageView
+import androidx.lifecycle.lifecycleScope
+import com.example.hwone.Constants.EXTRA_EMAIL
+import com.example.hwone.databinding.ActivityMainBinding
+import com.example.hwone.userdto.UserPreferencesDataStore
+import com.example.hwone.userdto.UserPreferencesInterface
+import com.example.hwone.userdto.UserPreferencesSharedPrefs
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val userPreferences: UserPreferencesInterface by lazy {
+//         Choose the desired implementation: SharedPreferences or DataStore
+        UserPreferencesDataStore(this) // or UserPreferencesSharedPrefs(this)
+//        UserPreferencesSharedPrefs(this) // or UserPreferencesDataStore(this)
+    }
+    private var backPressedOnce = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupUI()
+        setupListeners()
+        applyWindowInsets()
+        handleBackPress()
+    }
+
+    // Customizing the user interface
+    private fun setupUI() {
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        lifecycleScope.launch {
+            val email = intent.getStringExtra(EXTRA_EMAIL) ?: getString(R.string.userFullName)
+            val name = parseEmailToName(email)
 
-        val settingsTextView = findViewById<AppCompatTextView>(R.id.textSettings)
-        val logOutButton = findViewById<Button>(R.id.buttonLogOut)
-// Приймаємо електронну пошту з AuthActivity
-        val email = intent.getStringExtra("email")
-        val nameTextView = findViewById<TextView>(R.id.textFullName)
-        val avatarIcon = findViewById<CircleImageView>(R.id.iconProfile)
+            binding.iconProfile.setImageResource(R.drawable.icon1)
+            binding.textFullName.text = name
+        }
+    }
 
-        // Обробляємо електронну пошту, щоб перетворити її на ім'я
-        val name = parseEmailToName(email ?: getString(R.string.userFullName))
+    //Event listeners are configured here
+    private fun setupListeners() {
+        binding.textSettings.setOnClickListener {
+            openSettings()
+        }
 
-        // Відображаємо ім'я на екрані
-//        avatar.setImageResource(R.drawable.icon1)
-        nameTextView.text = name
+        binding.buttonLogOut.setOnClickListener {
+            logoutUser()
+        }
+    }
 
+    // Application of indents for window inserts
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+    private fun applyWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+    //The logic for processing the "Back" button is implemented here.
+    // Includes checking if a button has been pressed twice to exit the program or exit the activity.
+    private fun handleBackPress() {
+        val handler = Handler(Looper.getMainLooper())
+        val resetBackPressed = Runnable { backPressedOnce = false }
 
-        settingsTextView.setOnClickListener {
-            // Інтент для переходу в загальні налаштування
-            val intent = Intent(Settings.ACTION_SETTINGS)
-            startActivity(intent)
-        }
+        onBackPressedDispatcher.addCallback(this) {
+            if (backPressedOnce) {
+                finish()
+            } else {
+                this@MainActivity.backPressedOnce = true
+                Toast.makeText(
+                    this@MainActivity, getString(R.string.notificationBackButton),
+                    Toast.LENGTH_SHORT
+                ).show()
 
-        logOutButton.setOnClickListener {
-
-            // Переходимо на екран AuthActivity
-            val intent = Intent(this, AuthActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                // Start a timer to reset backPressedOnce after 2 seconds
+                handler.postDelayed(resetBackPressed, 2000)
+            }
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        // Анімація для повернення назад
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    //Method to open device settings.
+    private fun openSettings() {
+        val intent = Intent(Settings.ACTION_SETTINGS)
+        startActivity(intent)
     }
 
-    // Функція для обробки електронної пошти та перетворення її на ім'я
+    //Responsible for user exit from the system, clears data and redirects to the authorization screen.
+    private fun logoutUser() {
+        lifecycleScope.launch {
+            userPreferences.logout()
+            navigateToAuthActivity()
+        }
+    }
+
+    //A method that is called after the user logs out to go to the authorization screen.
+    private fun navigateToAuthActivity() {
+        val intent = Intent(this@MainActivity, AuthActivity::class.java)
+        val options = ActivityOptionsCompat.makeCustomAnimation(
+            this,
+            R.anim.slide_in_left,
+            R.anim.slide_out_right
+        )
+        startActivity(intent, options.toBundle())
+        finish()
+    }
+
+    //parse the email in Full name
     private fun parseEmailToName(email: String): String {
-            val namePart = email.substringBefore("@") // Беремо частину до @
-            val nameParts = namePart.split(".")
-                .joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() } }
-            return nameParts
-
-
+        val namePart = email.substringBefore("@")
+        return namePart.split(".")
+            .joinToString(" ") { it.replaceFirstChar { it.uppercase() } }
     }
 }
