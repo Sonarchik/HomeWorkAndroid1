@@ -5,7 +5,7 @@
     android:id="@+id/auth"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_blue"
+    android:background="@color/back_ground_color"
     tools:context=".AuthActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -41,10 +41,11 @@
         style="@style/TextAppearance.AppCompat.White24"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/letsGetAcquaintedLabel"
         app:layout_constraintBottom_toTopOf="@id/textLabelFillOut"
-        app:layout_constraintEnd_toEndOf="@id/guidelineStart"
-        app:layout_constraintStart_toStartOf="@id/guidelineEnd"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -78,8 +79,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/registrationEmailLabel"
-        android:textColorHint="@color/gray"
-        app:cursorColor="@color/white_primary"
+        android:textColorHint="@color/text_color_secondary"
+        app:cursorColor="@color/settings_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -90,7 +91,7 @@
             style="@style/TextInputEditTextFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/dark_blue"
+            android:backgroundTint="@color/back_ground_color"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineStart" />
@@ -104,8 +105,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/registrationPasswordLabel"
-        android:textColorHint="@color/gray"
-        app:cursorColor="@color/white_primary"
+        android:textColorHint="@color/text_color_secondary"
+        app:cursorColor="@color/settings_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -116,7 +117,7 @@
             style="@style/TextInputEditTextFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/dark_blue"
+            android:backgroundTint="@color/back_ground_color"
             android:inputType="textPassword"
             android:letterSpacing="0.3"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -192,7 +193,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textLabelByClickingRegister"
         style="@style/TextAppearance.AppCompat.White12"
-        android:layout_width="240dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="8dp"

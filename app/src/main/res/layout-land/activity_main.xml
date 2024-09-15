@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/text_color_primary"
     tools:context=".MainActivity">
 
     <View
         android:id="@+id/topView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/dark_blue"
+        android:background="@color/back_ground_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -81,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="@id/flowBottomGroup"
         app:layout_constraintEnd_toEndOf="@id/flowBottomGroup"
         app:layout_constraintTop_toTopOf="@id/flowBottomGroup"
-        app:strokeColor="@color/gray"
+        app:strokeColor="@color/text_color_secondary"
         app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -178,7 +178,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/icon_default"
-        app:civ_circle_background_color="@color/white_primary"
+        app:civ_circle_background_color="@color/settings_color"
         app:layout_constraintBottom_toBottomOf="@id/topView"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
