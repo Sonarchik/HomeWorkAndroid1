@@ -3,37 +3,37 @@
 
     <!-- Стилі для текстів -->
     <style name="TextAppearance.AppCompat.White24">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_color_primary</item>
         <item name="android:textSize">24sp</item>
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
     <style name="TextAppearance.AppCompat.White18">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_color_primary</item>
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
     <style name="TextAppearance.AppCompat.White16">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_color_primary</item>
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
     <style name="TextAppearance.AppCompat.LogOut14">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
     <style name="TextAppearance.AppCompat.White14">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
     <style name="TextAppearance.AppCompat.White12">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_color_primary</item>
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/open_sans_regular</item>
     </style>
@@ -42,7 +42,7 @@
     <style name="ImageButtonStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/text_color_primary</item>
     </style>
 
     <!-- Стиль для кнопок -->
@@ -52,16 +52,16 @@
     </style>
 
     <style name="ButtonStyle.LogOut" parent="ButtonStyle">
-        <item name="android:backgroundTint">@color/dark_blue</item>
+        <item name="android:backgroundTint">@color/back_ground_color</item>
         <item name="android:paddingStart">35dp</item>
         <item name="android:paddingEnd">35dp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ButtonStyle.Contacts" parent="ButtonStyle">
-        <item name="android:backgroundTint">@color/orange_primary</item>
-        <item name="android:textColor">@color/white_primary</item>
+        <item name="android:backgroundTint">@color/icon_color</item>
+        <item name="android:textColor">@color/settings_color</item>
         <item name="android:textSize">16sp</item>
         <item name="android:letterSpacing">0.1</item>
     </style>
@@ -81,15 +81,15 @@
 
     <style name="ButtonStyle.Register" parent="ButtonStyle">
         <item name="android:backgroundTint">@color/color_selector_for_blue_key</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_color_primary</item>
         <item name="android:textSize">16sp</item>
         <item name="android:letterSpacing">0.1</item>
-        <item name="strokeColor">@color/orange_primary</item>
+        <item name="strokeColor">@color/icon_color</item>
     </style>
 
     <style name="ButtonStyle.SingIn" parent="ButtonStyle">
-        <item name="android:backgroundTint">@color/dark_blue</item>
-        <item name="android:textColor">@color/white_primary</item>
+        <item name="android:backgroundTint">@color/back_ground_color</item>
+        <item name="android:textColor">@color/settings_color</item>
         <item name="android:textSize">14sp</item>
     </style>
 
